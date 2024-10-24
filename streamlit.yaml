@@ -4,6 +4,8 @@ metadata:
   name: johntest2
   annotations:
     helm.sh/hook: post-install, post-upgrade
+    nginx.ingress.kubernetes.io/proxy-body-size: "2048m"  # 設置 client_body_buffer_size
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "6000"  # 設置 client_body_timeout
 spec:
   defaultEnvs:
   - defaultValue: /project/path/to/your/streamlit.py
