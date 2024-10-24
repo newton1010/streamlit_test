@@ -31,9 +31,9 @@ spec:
               streamlit run $(FILE_PATH)
                 --server.address 0.0.0.0
                 --server.baseUrlPath $(PRIMEHUB_APP_BASE_URL)
-                --server.enableWebsocketCompression "true"
-                --server.enableCORS "true"
-                --server.enableXsrfProtection "true"
+                --server.enableWebsocketCompression "false"
+                --server.enableCORS "false"
+                --server.enableXsrfProtection "false"
                 --server.maxUploadSize $(MAX_UPLOAD_SIZE)
             ports:
             - containerPort: 8501
