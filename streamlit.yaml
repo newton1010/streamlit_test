@@ -35,6 +35,7 @@ spec:
                 --server.enableCORS "false"
                 --server.enableXsrfProtection "false"
                 --server.maxUploadSize $(MAX_UPLOAD_SIZE)
+                --theme.base dark
             ports:
             - containerPort: 8501
               name: http
