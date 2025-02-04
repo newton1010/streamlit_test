@@ -18,17 +18,6 @@ spec:
     spec:
       podTemplate:
         spec:
-        initContainers:
-        - name: set-sysctl
-          image: busybox:latest
-          securityContext:
-            privileged: true
-          command:
-            - /bin/sh
-            - -c
-            - |
-              sysctl -w fs.inotify.max_user_watches=32400
-              sysctl -w fs.inotify.max_user_instances=1024
           containers:
           - name: smpessstreamlit
             image: infuseai/primehub-apps:streamlit-v1.37.0
@@ -39,6 +28,8 @@ spec:
             - cd $(dirname $FILE_PATH);
               [ -f "packages.txt" ] && apt-get update && xargs -P1 apt-get install -yq < packages.txt;
               [ -f "requirements.txt" ] && pip install --upgrade pip && xargs -n 1 pip install < requirements.txt;
+              sysctl -w fs.inotify.max_user_watches=32400;
+              sysctl -w fs.inotify.max_user_instances=1024;
               streamlit run $(FILE_PATH)
                 --server.address 0.0.0.0
                 --server.baseUrlPath $(PRIMEHUB_APP_BASE_URL)
