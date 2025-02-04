@@ -18,6 +18,17 @@ spec:
     spec:
       podTemplate:
         spec:
+        initContainers:
+        - name: set-sysctl
+          image: busybox:latest
+          securityContext:
+            privileged: true
+          command:
+            - /bin/sh
+            - -c
+            - |
+              sysctl -w fs.inotify.max_user_watches=32400
+              sysctl -w fs.inotify.max_user_instances=1024
           containers:
           - name: smpessstreamlit
             image: infuseai/primehub-apps:streamlit-v1.37.0
@@ -35,7 +46,6 @@ spec:
                 --server.enableCORS "false"
                 --server.enableXsrfProtection "false"
                 --server.maxUploadSize $(MAX_UPLOAD_SIZE)
-                --server.fileWatcherType none
                 --theme.base dark
             ports:
             - containerPort: 8501
