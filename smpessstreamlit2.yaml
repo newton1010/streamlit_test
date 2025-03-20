@@ -26,7 +26,7 @@ spec:
             - -c
             args:
             - cd $(dirname $FILE_PATH);
-              [ -f "packages.txt" ] && apt-get update && xargs -P1 apt-get install -yq < packages.txt;
+              [ -f "packages.txt" ] && apt-get update && sudo apt install procps && xargs -P1 apt-get install -yq < packages.txt;
               [ -f "requirements.txt" ] && pip install --upgrade pip && xargs -n 1 pip install < requirements.txt;
               sysctl -w fs.inotify.max_user_watches=32400;
               sysctl -w fs.inotify.max_user_instances=1024;
